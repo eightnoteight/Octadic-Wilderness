@@ -37,15 +37,13 @@ typedef struct {
 	int x;
 	int y;
 } coor;
-void swap(int *p, int *q)
-{
+void swap(int *p, int *q){
 	int temp;
 	temp=*p;
 	*p=*q;
 	*q=temp;
 }
-void shuffle(int *data,int size)
-{
+void shuffle(int *data,int size){
 	int i,j;
 	srand(time(NULL));
 	for (i = 0; i < size-1; ++i)
@@ -123,8 +121,7 @@ void kidreaper(int ro,int co,int val) {
 /*  reaper had this habit of keeping his secret flag 
 	somewhere in the wilderness. To recognize his 
 	architecture */
-void reaper(int tools[], int meas, coor sflag)
-{
+void reaper(int tools[], int meas, coor sflag){
 	int worh=sqrt(meas),i,j,k=0;
 	int totwor=worh*14 + worh -1;
 	int totorh=worh*9 +worh -1;
@@ -139,20 +136,17 @@ void reaper(int tools[], int meas, coor sflag)
 		}
 	}
 }
-int findzero(int dat[])
-{
+int findzero(int dat[]){
 	int i;
 	for (i = 0; i < 9; ++i)
 		if (dat[i]==0)
 			return i;
 }
-void moveint(int dat[], coor pint)
-{
+void moveint(int dat[], coor pint){
 	int z=findzero(dat),sp=(pint.x) + ((pint.y)*3);
 	swap(dat+sp,dat+z);
 }
-boool isgoalmatrix()
-{
+boool isgoalmatrix(){
 	int i;
 	int gmat[]={1,2,3,8,0,4,7,6,5};
 	for (i = 0; i < 9; ++i)
@@ -160,8 +154,7 @@ boool isgoalmatrix()
 			return 1;
 	return 0;
 }
-boool gameinit()
-{
+boool gameinit(){
 	int i,c;
 	coor zero;
 	zero.x=0;
@@ -228,8 +221,7 @@ void Winner(){
 	clear();
 	mvprintw(row/2,(col-10)/2, "WINNER! :)");
 }
-int main(int argc, char const *argv[])
-{
+int main(int argc, char const *argv[]){
 	int i;
 	initscr();
 	raw();
