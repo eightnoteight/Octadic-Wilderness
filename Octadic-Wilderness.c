@@ -21,7 +21,7 @@
 int matrix[]={0,1,2,3,4,5,6,7,8};
 typedef enum { False, True } boool;
 const boool number[][64] ={
-     {1,0,1,1,1,0,1,1,0,1,0,1,0,1,1,0,1,0,1,0,1,1,0,1,0,1,0,1,1,0,1,1,1,0,1},
+     {1,0,0,0,0,0,1,1,0,0,0,0,0,1,1,0,0,0,0,0,1,1,0,0,0,0,0,1,1,0,0,0,0,0,1},
      {1,0,0,0,1,0,1,1,0,0,0,1,0,1,1,0,0,0,1,0,1,1,0,0,0,1,0,1,1,0,0,0,1,0,1},
      {1,0,1,1,1,0,1,1,0,0,0,1,0,1,1,0,1,1,1,0,1,1,0,1,0,0,0,1,1,0,1,1,1,0,1},
      {1,0,1,1,1,0,1,1,0,0,0,1,0,1,1,0,1,1,1,0,1,1,0,0,0,1,0,1,1,0,1,1,1,0,1},
@@ -141,6 +141,7 @@ int findzero(int dat[]){
 	for (i = 0; i < 9; ++i)
 		if (dat[i]==0)
 			return i;
+	return -1;
 }
 void moveint(int dat[], coor pint){
 	int z=findzero(dat),sp=(pint.x) + ((pint.y)*3);
@@ -151,11 +152,11 @@ boool isgoalmatrix(){
 	int gmat[]={1,2,3,8,0,4,7,6,5};
 	for (i = 0; i < 9; ++i)
 		if (matrix[i]!=gmat[i])
-			return 1;
-	return 0;
+			return 0;
+	return 1;
 }
 boool gameinit(){
-	int i,c;
+	int c;
 	coor zero;
 	zero.x=0;
 	zero.y=0;
@@ -164,7 +165,7 @@ boool gameinit(){
 		shuffle(matrix,9);
 	reaper(matrix, 9, zero); /* reaper is the architect of wilderness */
 	refresh();
-	while(isgoalmatrix())
+	while(*(matrix+4)!=0)
 	{
 		c=getch();
 		switch(c)
@@ -210,7 +211,7 @@ boool gameinit(){
 				return 0;
 		}
 	}
-	return 1;
+	return isgoalmatrix();
 }
 void Loser(){
 	clear();
